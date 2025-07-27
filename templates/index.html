@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+<h1>Последние книги:</h1>
+{% if books %}
+    {% for book in books %}
+        <div>
+            <p><strong>{{ book.title }} </strong>(автор: {{ book.author }})</p>
+            <!-- Формируем ссылку на жанр -->
+            <a href="/genres/{{ book.genre.id }}">Жанр: {{ book.genre.name }}</a>
+            <!-- Чекбокс и кнопка сохранения статуса прочитанной книги -->
+            <form method="POST" action="/mark_as_read">
+                <input type="hidden" name="book_id" value="{{ book.id }}"/>
+                <label>
+                    Прочитана:
+                    <input type="checkbox" name="is_read" {% if book.is_read %}checked{% endif %}>
+                </label>
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Нет книг.</p>
+{% endif %}
+</body>
+</html>
+

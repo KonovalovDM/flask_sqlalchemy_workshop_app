@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Книги жанра "{{ genre.name }}"</title>
+</head>
+<body>
+<h1>Книги жанра "{{ genre.name }}":</h1>
+{% if books %}
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} (Автор: {{ book.author }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет книг в данном жанре.</p>
+{% endif %}
+</body>
+</html>
